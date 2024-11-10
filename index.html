@@ -14,12 +14,30 @@
         <p>Dheee  BMW  !</p>
         <button onclick="showMessage()">Click Here</button>
         
-        <!-- Hidden message -->
+        <!-- Hidden messages -->
         <div id="specialMessage" class="hidden">
             <p>Oh pinne!</p>
         </div>
+        <div id="happyMessage" class="hidden">
+            <p>Happy Aayo!</p>
+        </div>
     </div>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Function to display the hidden messages
+        function showMessage() {
+            var message = document.getElementById("specialMessage");
+            var happyMessage = document.getElementById("happyMessage");
+
+            // Remove the hidden class to display the first message
+            message.classList.remove("hidden");
+
+            // After 2 seconds, show the "happy aayo" message
+            setTimeout(function() {
+                happyMessage.classList.remove("hidden");
+            }, 2000); // 2000 milliseconds = 2 seconds
+        }
+    </script>
 </body>
 </html>
+
