@@ -3,32 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello Ansi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Interactive Webpage</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            background-image: url('background.jpg'); /* Replace with your actual background image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white; /* Text color for contrast */
+            text-align: center;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 80%;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #greeting {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        #surpriseButton {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #surpriseButton:hover {
+            background-color: #e68a00;
+        }
+
+        #videoContainer {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #videoElement {
+            width: 100%;
+            max-width: 100%; /* Ensures full width for full-screen */
+            border-radius: 10px;
+        }
+
+        #bonneNuit {
+            display: none;
+            font-size: 2em;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+    </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Hello Ansi!</h1>
-        <p>Oh pinne 😀!</p>
-        <button onclick="showMessage()">Click Here</button>
+        <div id="greeting">Hi Kuttu!</div>
+        <button id="surpriseButton">Here is the Surprise!</button>
         
-        <!-- Hidden messages -->
-        <div id="specialMessage" class="hidden">
-            <p>Oh pinne!</p>
-        </div>
-        <div id="happyMessage" class="hidden">
-            <p>Happy Aayo!</p>
+        <div id="videoContainer">
+            <video id="videoElement" controls>
+                <source src="your-video-file.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
-        <!-- Audio Element -->
-        <audio id="backgroundMusic" src="your-audio-file.mp3" preload="auto"></audio>
+        <div id="bonneNuit">Bonne Nuit!</div>
     </div>
 
-    <!-- Link to External JS File -->
-    <script src="scripts.js"></script>
+    <script>
+        // Get elements
+        const greeting = document.getElementById('greeting');
+        const surpriseButton = document.getElementById('surpriseButton');
+        const videoContainer = document.getElementById('videoContainer');
+        const videoElement = document.getElementById('videoElement');
+        const bonneNuit = document.getElementById('bonneNuit');
+
+        // Add event listener to the button
+        surpriseButton.addEventListener('click', function() {
+            surpriseButton.style.display = 'none'; // Hide the button
+            videoContainer.style.display = 'block'; // Show the video container
+
+            // Play the video
+            videoElement.play();
+
+            // Make the video fullscreen
+            if (videoElement.requestFullscreen) {
+                videoElement.requestFullscreen(); // For most browsers
+            } else if (videoElement.mozRequestFullScreen) { // For Firefox
+                videoElement.mozRequestFullScreen();
+            } else if (videoElement.webkitRequestFullscreen) { // For Chrome, Safari, and Opera
+                videoElement.webkitRequestFullscreen();
+            } else if (videoElement.msRequestFullscreen) { // For IE/Edge
+                videoElement.msRequestFullscreen();
+            }
+
+            // After the video ends, show "Bonne Nuit"
+            videoElement.onended = function() {
+                videoContainer.style.display = 'none'; // Hide the video
+                bonneNuit.style.display = 'block'; // Show "Bonne Nuit"
+            };
+        });
+    </script>
+
 </body>
 </html>
-
-
